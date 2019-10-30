@@ -1,0 +1,42 @@
+
+PLAY [Rename newly created host] **************************************************************************************************
+
+TASK [Gathering Facts] ************************************************************************************************************
+ok: [10.146.55.124]
+
+TASK [customersetup : Remove the third line on the newly created host 1] **********************************************************
+changed: [10.146.55.124]
+
+TASK [customersetup : Add our hostname to etc hosts] ******************************************************************************
+changed: [10.146.55.124]
+
+TASK [customersetup : Run hostnamectl on host to the new name and IP] *************************************************************
+changed: [10.146.55.124]
+
+TASK [customersetup : Restart network service for interface eth0] *****************************************************************
+changed: [10.146.55.124]
+
+TASK [customersetup : moving sql file to oracle user] *****************************************************************************
+changed: [10.146.55.124]
+
+TASK [customersetup : moving sql file to oracle user] *****************************************************************************
+changed: [10.146.55.124]
+
+TASK [customersetup : Verify oraclesid startup] ***********************************************************************************
+changed: [10.146.55.124]
+
+TASK [customersetup : Verify oraclesid startup for replacement] *******************************************************************
+changed: [10.146.55.124]
+
+TASK [customersetup : Replace HOST IP to start listner] ***************************************************************************
+changed: [10.146.55.124]
+
+TASK [customersetup : Replace HOST IP to verify listner] **************************************************************************
+changed: [10.146.55.124]
+
+TASK [customersetup : Repace ORACLESID to verify listner] *************************************************************************
+ok: [10.146.55.124]
+
+PLAY RECAP ************************************************************************************************************************
+10.146.55.124              : ok=12   changed=10   unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+

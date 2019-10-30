@@ -1,0 +1,27 @@
+---
+- name: moving sql file to oracle user
+  copy:
+    src: startupcode.sql
+    dest: /home/oracle/startupcode.sql
+    owner: oracle
+    group: oinstall
+    mode: 0644
+
+- name: moving sql file to oracle user
+  copy:
+    src: shutdown.sql
+    dest: /home/oracle/shutdown.sql
+    owner: oracle
+    group: oinstall
+    mode: 0644
+
+- name:  Verify oraclesid startup
+  become: yes
+  become_user: oracle
+  shell: db XPPNP && spdba</home/oracle/startupcode.sql
+  args:
+    executable: /bin/csh
+  #  _uses_shell:  true
+  #  stdin: "@/home/oracle/startupcode.sql"
+ 
+

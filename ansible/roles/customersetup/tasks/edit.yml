@@ -1,0 +1,29 @@
+---
+
+##- debug: "IP VALUE {{ lookup('env', 'PROVISIONED_IP') }} ----"
+##- debug: "HOME value {{ lookup('env', 'HOME') }}------"
+- name:  Verify oraclesid startup for replacement
+  become: yes
+  become_user: oracle
+  shell: db ora122
+  args:
+    executable: /bin/csh
+- name: Replace HOST IP to start listner
+  replace:
+    path: "{{ lookup('env', 'start_lis_path') }}"
+    regexp: '(HOST = ([0-9]{1,3}[\\.]){3}[0-9]{1,3})'
+    replace: "HOST = {{ lookup('env', 'PROVISIONED_IP') }}"
+    backup: yes
+- name: Replace HOST IP to verify listner
+  replace:
+    path: "{{ lookup('env', 'verify_lis_path') }}"
+    regexp: '(HOST = ([0-9]{1,3}[\\.]){3}[0-9]{1,3})'
+    replace: "HOST = {{ lookup('env', 'PROVISIONED_IP') }}"
+    backup: yes
+- name: Repace ORACLESID to verify listner
+  replace:
+    path: "{{ lookup('env', 'verify_lis_path') }}"
+    regexp: 'XPPNP'
+    replace: "{{ lookup('env', 'ORACLESID') }}"
+    backup: yes
+

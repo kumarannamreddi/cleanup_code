@@ -1,0 +1,124 @@
+
+PLAY [Rename newly created host] ***********************************************
+
+TASK [Gathering Facts] *********************************************************
+ok: [10.146.55.51]
+
+TASK [customersetup : Remove the third line on the newly created host 1] *******
+changed: [10.146.55.51]
+
+cmd:
+sed
+-i
+3d
+/etc/hosts
+
+start:
+2019-10-29 09:50:23.672366
+
+end:
+2019-10-29 09:50:23.675169
+
+delta:
+0:00:00.002803
+
+TASK [customersetup : Add our hostname to etc hosts] ***************************
+changed: [10.146.55.51]
+
+msg:
+line added
+
+TASK [customersetup : Run hostnamectl on host to the new name and IP] **********
+changed: [10.146.55.51]
+
+cmd:
+hostnamectl
+set-hostname
+XPPNPTEXASA
+
+start:
+2019-10-29 09:50:24.406490
+
+end:
+2019-10-29 09:50:24.651148
+
+delta:
+0:00:00.244658
+
+TASK [customersetup : Restart network service for interface eth0] **************
+changed: [10.146.55.51]
+
+TASK [customersetup : moving sql file to oracle user] **************************
+changed: [10.146.55.51]
+
+TASK [customersetup : moving sql file to oracle user] **************************
+changed: [10.146.55.51]
+
+TASK [customersetup : Verify oraclesid startup] ********************************
+changed: [10.146.55.51]
+
+cmd:
+db XPPNP && spdba</home/oracle/startupcode.sql
+
+start:
+2019-10-29 09:50:29.796146
+
+end:
+2019-10-29 09:55:59.392289
+
+delta:
+0:05:29.596143
+
+stdout:
+
+SQL*Plus: Release 12.2.0.1.0 Production on Tue Oct 29 09:50:47 2019
+
+Copyright (c) 1982, 2016, Oracle.  All rights reserved.
+
+Connected to an idle instance.
+
+SQL> ORA-32004: obsolete or deprecated parameter(s) specified for RDBMS instance
+ORACLE instance started.
+
+Total System Global Area 7.5162E+10 bytes
+Fixed Size		   12169032 bytes
+Variable Size		 8589934776 bytes
+Database Buffers	 6.6035E+10 bytes
+Redo Buffers		  524701696 bytes
+Database mounted.
+Database opened.
+SQL> SQL> Disconnected from Oracle Database 12c Enterprise Edition Release 12.2.0.1.0 - 64bit Production
+
+TASK [customersetup : Verify oraclesid startup for replacement] ****************
+changed: [10.146.55.51]
+
+cmd:
+db ora122
+
+start:
+2019-10-29 09:57:02.007468
+
+end:
+2019-10-29 09:57:06.176993
+
+delta:
+0:00:04.169525
+
+TASK [customersetup : Replace HOST IP to start listner] ************************
+changed: [10.146.55.51]
+
+msg:
+1 replacements made
+
+TASK [customersetup : Replace HOST IP to verify listner] ***********************
+changed: [10.146.55.51]
+
+msg:
+1 replacements made
+
+TASK [customersetup : Repace ORACLESID to verify listner] **********************
+ok: [10.146.55.51]
+
+PLAY RECAP *********************************************************************
+10.146.55.51               : ok=12   changed=10   unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+

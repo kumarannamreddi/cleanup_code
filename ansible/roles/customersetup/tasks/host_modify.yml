@@ -1,0 +1,24 @@
+- name:  Remove the third line on the newly created host 1
+  command: sed -i 3d /etc/hosts
+  # - name: Include vars of ctepnpcust1.yml for reuse  
+  # include_vars:
+  #   file: group_vars/ctepnpcust1.yml
+- name: Add our hostname to etc hosts
+  lineinfile:
+    path: /etc/hosts
+    line: "{{ ipaddress }} {{ hostname }}  {{ hostname }}.{{ domain }}" 
+- name: Run hostnamectl on host to the new name and IP
+  command: hostnamectl set-hostname "{{ hostname }}"
+  # - name: Replace the etc hostname file  entry with our own
+  # lineinfile:
+  #   path: /etc/hostname
+  #   regexp: 'changeme'
+  #  line: "{{ oraclesid }}{{ hostname }}" 
+  #   owner: root
+  #  group: root
+    #   mode: '0644'
+- name: Restart network service for interface eth0
+  service:
+    name: network
+    state: restarted
+    args: eth0

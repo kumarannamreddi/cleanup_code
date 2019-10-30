@@ -1,0 +1,14 @@
+---
+- name: Rename newly created host
+  hosts: XPPNPTEXASA
+  roles:
+    - customersetup
+  remote_user: ec2-user
+  become_user: root
+  become: yes
+  vars:
+     hostname: XPPNPTEXASA
+     oraclesid: CTPNP
+     domain: cte-prod.aws.gwl.com
+
+     ipaddress: 10.146.55.51

@@ -1,0 +1,29 @@
+name: copy sql file over to dest
+  copy:
+    src: /DATA/DEV/ORCANSIBLE/ansible/roles/oracletest/templates/count.sql
+    dest: /home/oracle/count.sql
+    owner: oracle
+    group: oinstall
+    mode: 0644
+
+- name: test sqlplus 
+
+  environment:  
+    ORACLE_HOME: "{{ oracle_home_path }}"
+    LD_LIBRARY_PATH: "{{ ld_library_path }}"
+    ORACLE_SID: "{{ oraclesid }}"
+    PATH: $ORACLE_HOME/bin:"{{ bin_path }}"  
+    SQL_PATH: "{{ sql_path }}"
+
+  command: "sqlplus '/as sysdba'"
+  become: yes
+  become_user: oracle
+  args:
+    chdir: "{{ oracle_home_path }}" 
+    _uses_shell:  true
+    stdin: "set ORACLE_HOME=$ORACLE_HOME"
+    stdin: "set ORACLE_SID=$ORACLE_SID"
+    stdin: "set LD_LIBRARY_PATH=$LD_LIBRARY_PATH"
+    stdin: "set PATH=$PATH"
+    stdin: "set SQL_PATH=$SQL_PATH"
+    stdin: "@/home/oracle/count.sql"

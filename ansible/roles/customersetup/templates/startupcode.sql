@@ -1,0 +1,5 @@
+startup
+
+exit
+END;
+/
